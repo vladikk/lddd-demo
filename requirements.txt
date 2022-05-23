@@ -1,0 +1,12 @@
+To open a support case the customer has to provide the following information:
+* Product: Choose from a list of available products
+* Category: General guidance, bug report, billing issue
+* Title
+* Message
+* Priority: Low, medium, high
+
+New support cases have to be assigned to an agent.
+Agents are assigned according to a machine learning algorithm that takes into account the case's details and agents' specialities.
+When a case is assigned to an agent, or a customer appends a message to the case, the assigned agent has to respond within the response SLA according to the agent's department and priority of the case.
+After an agent responds to a case, the customer has to either reply or mark the case as resolved within the amount of days set for the assigned agent's department. Otherwise, the case will be automatically marked as closed.
+If the agent doesn't reply within the reponse SLA, the customer can escalate the case. When a case is escalated, if the assigned agent is not a shift, the case has to be reassigned to a different agent. Furthermore, all the response SLAs are cut in half.

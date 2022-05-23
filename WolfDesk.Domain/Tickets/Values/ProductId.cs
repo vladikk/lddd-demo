@@ -1,0 +1,1 @@
+namespace WolfDesk.Domain.Tickets.Values;
