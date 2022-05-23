@@ -6,6 +6,7 @@ Background: Initialize an agent and a customer
     Given an agent named 'Mr. Wolf'
 
 Scenario: Request assignment of an agent for new tickets
+    Given the time is 2022/05/21 11:08:00
     When a new ticket is opened
     Then the ticket should be assigned to an agent
 
@@ -78,7 +79,8 @@ Scenario: Ticket tracks the correspondence between the customer and the agent
     And on 2022/05/18 10:01:00 the agent replies saying "Have you tried hiding it in an aggregate?"
     And on 2022/05/18 10:02:00 the customer replies saying "What's that?"
     And on 2022/05/18 10:03:00 the agent replies saying "It's a cluster of objects sharing a transactional boundary"
-    Then when the ticket displayed it has the following messages:
+    Then when the ticket is displayed its title is "Help me!!!1"
+    And it has the following messages:
         | From          | Sent on             | Message                                                    |
         | Vincent Jules | 2022/05/18 10:00:00 | I need to hide an entity                                   |
         | Mr. Wolf      | 2022/05/18 10:01:00 | Have you tried hiding it in an aggregate?                  |

@@ -7,14 +7,15 @@ namespace WolfDesk.Domain.Tickets
 {
     public class Ticket
     {
-        private IClock _clock;
-        private IAgentsInformationService _agentsInformationService;
-        private List<IDomainEvent> _domainEvents = new();
-        private List<Message> _messages = new();
+        private readonly IClock _clock;
+        private readonly IAgentsInformationService _agentsInformationService;
+        private readonly List<IDomainEvent> _domainEvents = new();
+        private readonly List<Message> _messages = new();
         public IList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
         public TicketId Id { get; }
         public UserId Customer { get; private set; }
         public Title Title { get; private set; }
+        public ProductId Product { get; private set; }
         public TicketPriority Priority { get; private set; }
         public TicketCategory Category { get; private set; }
         public UserId? AssignedAgent { get; private set; }
@@ -22,6 +23,7 @@ namespace WolfDesk.Domain.Tickets
         public bool Escalated { get; private set; } = false;
         public bool CanBeEscalated => Status == TicketStatus.PENDING_AGENT_RESPONSE && _clock.Now > ResponseDeadline!;
         public TicketStatus Status { get; private set; }
+        public int Version { get; private set; } = 0;
         
         public Ticket(IAgentsInformationService agentsInformationService, IClock? clock = null)
         {
@@ -30,12 +32,13 @@ namespace WolfDesk.Domain.Tickets
             Id = new TicketId();
         }
 
-        public void Open(UserId customer, Title title, MessageBody body, TicketPriority priority, TicketCategory category, bool escalated = false)
+        public void Open(UserId customer, Title title, MessageBody body, TicketPriority priority, TicketCategory category, ProductId product, bool escalated = false)
         {
             Customer = customer;
             Title = title;
             Priority = priority;
             Category = category;
+            Product = product;
             Escalated = escalated;
             ResetAssignment();
             
@@ -97,7 +100,7 @@ namespace WolfDesk.Domain.Tickets
         {
             AssignedAgent = null;
             Status = TicketStatus.UNASSIGNED;
-            _domainEvents.Add(new AssignmentRequested(EventId.Next(_domainEvents), Id, DateTime.Now));
+            _domainEvents.Add(new AssignmentRequested(Id, EventId.Next(_domainEvents), Category, Priority, Product, _clock.Now));
         }
 
         private void AddMessage(UserId author, MessageBody body)

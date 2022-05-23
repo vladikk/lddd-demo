@@ -19,6 +19,7 @@ public sealed class TicketLifecycle : Feature
     private Mock<IAgentsInformationService> _agentsInformationService = new();
     private Dictionary<string, UserId> _customers = new();
     private Dictionary<string, UserId> _agents = new();
+    private ProductId _product = new();
 
     private Ticket? _theTicket;
     private Ticket TheTicket => _theTicket!;
@@ -163,9 +164,18 @@ public sealed class TicketLifecycle : Feature
     [Then(@"the ticket should be reassigned to another agent")]
     public void AssertAssignmentRequired()
     {
-        var @event = (AssignmentRequested)TheTicket.DomainEvents.First(x => x is AssignmentRequested);
-        Assert.Equal(TheTicket.Id, @event.TicketId);
-        Assert.Equal(TicketStatus.UNASSIGNED, TheTicket.Status);
+        foreach (var e in TheTicket.DomainEvents.Where(x => x is AssignmentRequested).Cast<AssignmentRequested>())
+        {
+            if (e.TicketId == TheTicket.Id &&
+                e.Category == TheTicket.Category &&
+                e.Priority == TheTicket.Priority &&
+                e.Product == TheTicket.Product &&
+                e.Timestamp == _fakeClock.Now)
+            {
+                return;
+            }
+        }
+        Assert.True(false);
     }
 
     [Then(@"the agent should respond by (.+)")]
@@ -210,7 +220,13 @@ public sealed class TicketLifecycle : Feature
         Assert.False(TheTicket.Escalated);
     }
 
-    [Then(@"when the ticket displayed it has the following messages:")]
+    [Then(@"when the ticket is displayed its title is ""(.+)""")]
+    public void AssertTitle(string title)
+    {
+        Assert.Equal(Title.FromString(title), TheTicket.Title);
+    }
+    
+    [And(@"it has the following messages:")]
     public void AssertMessages(DataTable messagesTable)
     {
         var messages = TheTicket.GetMessages().ToArray();
@@ -238,7 +254,8 @@ public sealed class TicketLifecycle : Feature
         string body = "ticket body",
         TicketPriority priority = TicketPriority.MEDIUM,
         TicketCategory category = TicketCategory.GENERAL_GUIDANCE,
-        bool escalated = false)
+        bool escalated = false,
+        ProductId? product = null)
     {
         var result = new Ticket(_agentsInformationService.Object,  _fakeClock);
         result.Open(
@@ -247,6 +264,7 @@ public sealed class TicketLifecycle : Feature
             MessageBody.FromString(body),
             priority,
             category,
+            product ?? _product,
             escalated);
 
         return result;
