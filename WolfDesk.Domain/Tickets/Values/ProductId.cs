@@ -2,15 +2,15 @@ namespace WolfDesk.Domain.Tickets.Values;
 
 public record ProductId
 {
-    private Guid Value { get; }
-
     public ProductId() {
-        this.Value = Guid.NewGuid();
+        Value = Guid.NewGuid();
     }
 
     public ProductId(Guid value) {
-        this.Value = value;
+        Value = value;
     }
+
+    private Guid Value { get; }
 
     public static ProductId ParseString(string str) {
         if (!Guid.TryParse(str, out var value)) {
@@ -21,6 +21,6 @@ public record ProductId
     }
 
     public override string ToString() {
-        return this.Value.ToString();
+        return Value.ToString();
     }
 }

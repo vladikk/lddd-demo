@@ -1,5 +1,3 @@
-using WolfDesk.Domain;
-
 namespace WolfDesk.Domain.Tests;
 
 public class FakeClock : IClock

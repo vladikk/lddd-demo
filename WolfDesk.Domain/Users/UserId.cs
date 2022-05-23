@@ -2,15 +2,15 @@ namespace WolfDesk.Domain.Users;
 
 public record UserId
 {
-    private Guid Value { get; }
-
     public UserId() {
-        this.Value = Guid.NewGuid();
+        Value = Guid.NewGuid();
     }
 
     public UserId(Guid value) {
-        this.Value = value;
+        Value = value;
     }
+
+    private Guid Value { get; }
 
     public static UserId ParseString(string str) {
         if (!Guid.TryParse(str, out var value)) {
@@ -21,6 +21,6 @@ public record UserId
     }
 
     public override string ToString() {
-        return this.Value.ToString();
+        return Value.ToString();
     }
 }

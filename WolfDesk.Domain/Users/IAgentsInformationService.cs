@@ -1,7 +1,6 @@
 using WolfDesk.Domain.Tickets.Values;
-using WolfDesk.Domain.Users;
 
-namespace WolfDesk.Domain.Tickets;
+namespace WolfDesk.Domain.Users;
 
 public interface IAgentsInformationService
 {

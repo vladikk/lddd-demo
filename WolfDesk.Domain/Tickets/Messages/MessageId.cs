@@ -2,11 +2,11 @@ namespace WolfDesk.Domain.Tickets.Messages;
 
 public record MessageId
 {
-    private int Value { get; }
-
     private MessageId(int value) {
-        this.Value = value;
+        Value = value;
     }
+
+    private int Value { get; }
 
     public static MessageId FromString(string str) {
         int value;
@@ -22,6 +22,6 @@ public record MessageId
     }
 
     public override string ToString() {
-        return this.Value.ToString();
+        return Value.ToString();
     }
 }

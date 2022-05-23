@@ -1,9 +1,8 @@
-namespace WolfDesk.Domain.Tickets.Values
+namespace WolfDesk.Domain.Tickets.Values;
+
+public enum TicketPriority
 {
-    public enum TicketPriority
-    {
-        LOW,
-        MEDIUM,
-        HIGH
-    }
+    LOW,
+    MEDIUM,
+    HIGH
 }

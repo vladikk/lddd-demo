@@ -2,11 +2,11 @@ namespace WolfDesk.Domain;
 
 public record EventId
 {
-    private int Value { get; }
-
     private EventId(int value) {
-        this.Value = value;
+        Value = value;
     }
+
+    private int Value { get; }
 
     public static EventId FromInt(int value) {
         return new EventId(value);
@@ -21,10 +21,8 @@ public record EventId
         return new EventId(value);
     }
 
-    public static EventId Next(IList<IDomainEvent> current)
-    {
-        if (!current.Any())
-        {
+    public static EventId Next(IList<IDomainEvent> current) {
+        if (!current.Any()) {
             return FromInt(0);
         }
 
@@ -32,6 +30,6 @@ public record EventId
     }
 
     public override string ToString() {
-        return this.Value.ToString();
+        return Value.ToString();
     }
 }

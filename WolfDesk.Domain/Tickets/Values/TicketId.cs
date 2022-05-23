@@ -2,15 +2,15 @@ namespace WolfDesk.Domain.Tickets.Values;
 
 public record TicketId
 {
-    private Guid Value { get; }
-
     public TicketId() {
-        this.Value = Guid.NewGuid();
+        Value = Guid.NewGuid();
     }
 
     public TicketId(Guid value) {
-        this.Value = value;
+        Value = value;
     }
+
+    private Guid Value { get; }
 
     public static TicketId ParseString(string str) {
         if (!Guid.TryParse(str, out var value)) {
@@ -21,6 +21,6 @@ public record TicketId
     }
 
     public override string ToString() {
-        return this.Value.ToString();
+        return Value.ToString();
     }
 }

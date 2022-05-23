@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WolfDesk.Domain", "WolfDesk
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WolfDesk.Domain.Tests", "WolfDesk.Domain.Tests\WolfDesk.Domain.Tests.csproj", "{EA91E395-B237-4FD9-A28C-83AB67E293FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WolfDesk.Application", "WolfDesk.Application\WolfDesk.Application.csproj", "{6290AC01-EE63-4927-A1F5-22128AD2DBC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WolfDesk.Infrastructure", "WolfDesk.Infrastructure\WolfDesk.Infrastructure.csproj", "{821EB79E-F3AB-4821-BFD0-48CB78A4143A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{EA91E395-B237-4FD9-A28C-83AB67E293FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA91E395-B237-4FD9-A28C-83AB67E293FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA91E395-B237-4FD9-A28C-83AB67E293FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6290AC01-EE63-4927-A1F5-22128AD2DBC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6290AC01-EE63-4927-A1F5-22128AD2DBC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6290AC01-EE63-4927-A1F5-22128AD2DBC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6290AC01-EE63-4927-A1F5-22128AD2DBC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{821EB79E-F3AB-4821-BFD0-48CB78A4143A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{821EB79E-F3AB-4821-BFD0-48CB78A4143A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{821EB79E-F3AB-4821-BFD0-48CB78A4143A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{821EB79E-F3AB-4821-BFD0-48CB78A4143A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

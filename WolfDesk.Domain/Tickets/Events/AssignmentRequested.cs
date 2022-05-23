@@ -4,20 +4,20 @@ namespace WolfDesk.Domain.Tickets.Events;
 
 public record AssignmentRequested : IDomainEvent
 {
-    public EventId EventId { get; }
-    public TicketId TicketId { get; }
-    public DateTime Timestamp { get; }
-    public TicketPriority Priority { get; }
-    public TicketCategory Category { get; }
-    public ProductId Product { get; }
-        
     public AssignmentRequested(TicketId ticketId, EventId eventId, TicketCategory category, TicketPriority priority,
         ProductId product, DateTime timestamp) {
-        this.EventId = eventId;
-        this.TicketId = ticketId;
-        this.Timestamp = timestamp;
+        EventId = eventId;
+        TicketId = ticketId;
+        Timestamp = timestamp;
         Priority = priority;
         Category = category;
         Product = product;
     }
+
+    public TicketId TicketId { get; }
+    public TicketPriority Priority { get; }
+    public TicketCategory Category { get; }
+    public ProductId Product { get; }
+    public EventId EventId { get; }
+    public DateTime Timestamp { get; }
 }
