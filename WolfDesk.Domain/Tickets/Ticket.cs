@@ -62,6 +62,8 @@ public class Ticket
         AddMessage(AssignedAgent!, messageBody);
         Status = TicketStatus.PENDING_CUSTOMER_RESPONSE;
         ResponseDeadline = _clock.Now.Add(_agentsInformationService.GetResponseDeadlineForCustomer(AssignedAgent!));
+        var @event = new AgentResponded(Id, EventId.Next(_domainEvents), messageBody, Status, ResponseDeadline);
+        AddDomainEvent(@event);
     }
 
     public void AddCustomerResponse(MessageBody messageBody) {
